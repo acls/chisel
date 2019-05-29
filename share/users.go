@@ -5,11 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"path/filepath"
+	// "path/filepath"
 	"regexp"
 	"sync"
-
-	"github.com/fsnotify/fsnotify"
+	// "github.com/fsnotify/fsnotify"
 )
 
 type Users struct {
@@ -78,39 +77,39 @@ func (u *UserIndex) LoadUsers(configFile string) error {
 	if err := u.loadUserIndex(); err != nil {
 		return err
 	}
-	if err := u.addWatchEvents(); err != nil {
-		return err
-	}
+	// if err := u.addWatchEvents(); err != nil {
+	// 	return err
+	// }
 	return nil
 }
 
-// watchEvents is responsible for watching for updates to the file and reloading
-func (u *UserIndex) addWatchEvents() error {
-	watcher, err := fsnotify.NewWatcher()
-	if err != nil {
-		return err
-	}
-	configDir := filepath.Dir(u.configFile)
-	if err := watcher.Add(configDir); err != nil {
-		return err
-	}
-	go func() {
-		for e := range watcher.Events {
-			if e.Name != u.configFile {
-				continue
-			}
-			if e.Op&fsnotify.Write != fsnotify.Write {
-				continue
-			}
-			if err := u.loadUserIndex(); err != nil {
-				u.Infof("Failed to reload the users configuration: %s", err)
-			} else {
-				u.Debugf("Users configuration successfully reloaded from: %s", u.configFile)
-			}
-		}
-	}()
-	return nil
-}
+// // watchEvents is responsible for watching for updates to the file and reloading
+// func (u *UserIndex) addWatchEvents() error {
+// 	watcher, err := fsnotify.NewWatcher()
+// 	if err != nil {
+// 		return err
+// 	}
+// 	configDir := filepath.Dir(u.configFile)
+// 	if err := watcher.Add(configDir); err != nil {
+// 		return err
+// 	}
+// 	go func() {
+// 		for e := range watcher.Events {
+// 			if e.Name != u.configFile {
+// 				continue
+// 			}
+// 			if e.Op&fsnotify.Write != fsnotify.Write {
+// 				continue
+// 			}
+// 			if err := u.loadUserIndex(); err != nil {
+// 				u.Infof("Failed to reload the users configuration: %s", err)
+// 			} else {
+// 				u.Debugf("Users configuration successfully reloaded from: %s", u.configFile)
+// 			}
+// 		}
+// 	}()
+// 	return nil
+// }
 
 // loadUserIndex is responsible for loading the users configuration
 func (u *UserIndex) loadUserIndex() error {
