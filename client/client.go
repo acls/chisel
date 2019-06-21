@@ -2,6 +2,7 @@ package chclient
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"io"
 	"net"
@@ -29,6 +30,7 @@ type Config struct {
 	HTTPProxy        string
 	Remotes          []string
 	HostHeader       string
+	TLSClientConfig  func() *tls.Config
 }
 
 //Client represents a client instance
@@ -187,11 +189,16 @@ func (c *Client) connectionLoop() {
 			connerr = nil
 			chshare.SleepSignal(d)
 		}
+		var tlsConfig *tls.Config
+		if c.config.TLSClientConfig != nil {
+			tlsConfig = c.config.TLSClientConfig()
+		}
 		d := websocket.Dialer{
 			ReadBufferSize:   1024,
 			WriteBufferSize:  1024,
 			HandshakeTimeout: 45 * time.Second,
 			Subprotocols:     []string{chshare.ProtocolVersion},
+			TLSClientConfig:  tlsConfig,
 		}
 		//optionally CONNECT proxy
 		if c.httpProxyURL != nil {
