@@ -22,3 +22,6 @@ golang.org/x/net v0.0.0-20181017193950-04a2e542c03f h1:4pRM7zYwpBjCnfA1jRmhItLxY
 golang.org/x/net v0.0.0-20181017193950-04a2e542c03f/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/sys v0.0.0-20181019160139-8e24a49d80f8 h1:R91KX5nmbbvEd7w370cbVzKC+EzCTGqZq63Zad5IcLM=
 golang.org/x/sys v0.0.0-20181019160139-8e24a49d80f8/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
+golang.org/x/text v0.3.2 h1:tW2bmiBqwgJj/UpqtC8EpXEZVYOwU0yG4iWbprSVAcs=
+golang.org/x/text v0.3.2/go.mod h1:bEr9sfX3Q8Zfm5fL9x+3itogRgK3+ptLWKqgva+5dAk=
+golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
